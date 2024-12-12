@@ -1,0 +1,12 @@
+/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/bin/Debug/net8.0/EgeApp.Backend.Shared.deps.json
+/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/bin/Debug/net8.0/EgeApp.Backend.Shared.dll
+/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/bin/Debug/net8.0/EgeApp.Backend.Shared.pdb
+/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/obj/Debug/net8.0/EgeApp.Backend.Shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/obj/Debug/net8.0/EgeApp.Backend.Shared.AssemblyInfoInputs.cache
+/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/obj/Debug/net8.0/EgeApp.Backend.Shared.AssemblyInfo.cs
+/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/obj/Debug/net8.0/EgeApp.Backend.Shared.csproj.CoreCompileInputs.cache
+/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/obj/Debug/net8.0/EgeApp.Backend.Shared.sourcelink.json
+/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/obj/Debug/net8.0/EgeApp.Backend.Shared.dll
+/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/obj/Debug/net8.0/refint/EgeApp.Backend.Shared.dll
+/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/obj/Debug/net8.0/EgeApp.Backend.Shared.pdb
+/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/obj/Debug/net8.0/ref/EgeApp.Backend.Shared.dll

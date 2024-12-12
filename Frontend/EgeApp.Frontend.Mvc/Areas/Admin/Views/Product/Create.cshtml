@@ -1,0 +1,134 @@
+﻿@model EgeApp.Frontend.Mvc.Models.Product.ProductCreateViewModel
+
+@{
+    ViewData["PageHeader"] = "";
+}
+<div class="container py-5">
+    <div class="p-4 rounded shadow-sm bg-white">
+        <h2 class="text-center text-uppercase fw-bold mb-4" style="color: #002855;">Ürün Ekle</h2>
+
+        <form asp-area="Admin" asp-controller="Product" asp-action="Create" method="post" enctype="multipart/form-data"
+            id="productForm">
+            <div class="row g-4">
+             
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header text-white" style="background-color: #002855;">
+                            <h4 class="mb-0">Ürün Bilgileri</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label asp-for="Name" class="form-label text-dark">Ürün Adı</label>
+                                    <input asp-for="Name" class="form-control">
+                                    <span class="text-danger" asp-validation-for="Name"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Brand" class="form-label text-dark">Marka</label>
+                                    <input asp-for="Brand" class="form-control">
+                                    <span class="text-danger" asp-validation-for="Brand"></span>
+                                </div>
+                                <div class="col-12">
+                                    <label asp-for="Description" class="form-label text-dark">Ürün Açıklaması</label>
+                                    <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                                    <span class="text-danger" asp-validation-for="Description"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Price" class="form-label text-dark">Fiyat</label>
+                                    <input asp-for="Price" class="form-control">
+                                    <span class="text-danger" asp-validation-for="Price"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="DiscountedPrice" class="form-label text-dark">İndirimli
+                                        Fiyat</label>
+                                    <input asp-for="DiscountedPrice" class="form-control">
+                                    <span class="text-danger" asp-validation-for="DiscountedPrice"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header text-white" style="background-color: #820b15;">
+                            <h4 class="mb-0">Kategori ve Resim</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label asp-for="CategoryId" class="form-label text-dark">Kategori</label>
+                                <select asp-for="CategoryId" asp-items="Model.CategoryList" class="form-control">
+                                    <option value="">Kategori Seçin</option>
+                                </select>
+                                <span class="text-danger" asp-validation-for="CategoryId"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Image" class="form-label text-dark">Ürün Resmi</label>
+                                <input asp-for="Image" class="form-control" type="file" id="imageUpload">
+                                <span class="text-danger" asp-validation-for="Image"></span>
+                                <div class="mt-3 text-center">
+                                    <img id="imagePreview" class="img-thumbnail img-fluid d-none"
+                                        style="max-height: 200px; object-fit: cover;" alt="Ürün Resmi">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header text-white" style="background-color: #002855;">
+                            <h4 class="mb-0">Ek Özellikler</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-3 d-flex align-items-center">
+                                    <input asp-for="IsActive" type="checkbox" class="form-check-input me-2">
+                                    <label asp-for="IsActive" class="form-label text-dark mb-0">Aktif</label>
+                                </div>
+                                <div class="col-md-3 d-flex align-items-center">
+                                    <input asp-for="IsHome" type="checkbox" class="form-check-input me-2">
+                                    <label asp-for="IsHome" class="form-label text-dark mb-0">Anasayfa</label>
+                                </div>
+                                <div class="col-md-3 d-flex align-items-center">
+                                    <input asp-for="IsFreeShipping" type="checkbox" class="form-check-input me-2">
+                                    <label asp-for="IsFreeShipping" class="form-label text-dark mb-0">Ücretsiz
+                                        Kargo</label>
+                                </div>
+                                <div class="col-md-3 d-flex align-items-center">
+                                    <input asp-for="IsSpecialProduct" type="checkbox" class="form-check-input me-2">
+                                    <label asp-for="IsSpecialProduct" class="form-label text-dark mb-0">Özel
+                                        Ürün</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            
+                <div class="col-md-12 text-end mt-4">
+                    <button type="submit" class="btn text-white fw-bold"
+                        style="background-color: #8a0611;">Kaydet</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('imageUpload').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            const preview = document.getElementById('imagePreview');
+            if (file) {
+                reader.onload = function (event) {
+                    preview.src = event.target.result;
+                    preview.classList.remove('d-none');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}

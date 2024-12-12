@@ -1,0 +1,139 @@
+﻿@model List<EgeApp.Frontend.Mvc.Models.Product.ProductViewModel>
+
+@{
+    ViewData["Title"] = "Ürünler";
+    ViewData["PageHeader"] = "";
+}
+
+<div class="container-fluid py-5">
+    <div class="p-4 rounded shadow-sm bg-white">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-uppercase fw-bold mb-0" style="color: #002855;">Ürünler</h2>
+            <a href="/admin/product/create" class="btn text-white fw-bold" style="background-color: #002855;">Ürün
+                Ekle</a>
+        </div>
+
+       
+        <div class="table-responsive">
+            <table id="product-data-table" class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Kategori</th>
+                        <th>Fiyat</th>
+                        <th class="text-center">Aktif</th> 
+                        <th class="text-center">Anasayfa</th> 
+                        <th class="text-center">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <td>@product.Name</td>
+                            <td>@(product.Category?.Name ?? "Kategori Yok")</td>
+                            <td>@product.Price.ToString("C")</td>
+                            <td class="text-center">
+                                <label class="switch">
+                                    <input type="checkbox" id="isActive-@product.Id"
+                                        onchange="changeProductStatus('@product.Id', 'IsActive')" @(product.IsActive ?
+                                    "checked" : "")>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td class="text-center">
+                                <label class="switch">
+                                    <input type="checkbox" id="isHome-@product.Id"
+                                        onchange="changeProductStatus('@product.Id', 'IsHome')" @(product.IsHome ? "checked"
+                                    : "")>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td class="text-center">
+                                <a asp-area="Admin" asp-controller="Product" asp-action="Update" asp-route-id="@product.Id"
+                                    class="btn btn-sm btn-outline-danger">Düzenle</a>
+                            </td>
+                        </tr>
+                    }
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">Ürün bulunamadı.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .container-fluid {
+            max-width: 95%;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #8a0611;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(14px);
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        const changeProductStatus = function (productId, field) {
+            $.ajax({
+                url: `/admin/product/updatefield/${productId}?field=${field}`,
+                type: 'POST',
+                success: function (res) {
+                    console.log(`${field} güncellendi:`, res);
+                },
+                error: function (err) {
+                    console.error(`${field} güncellenemedi:`, err);
+                }
+            });
+        };
+    </script>
+}

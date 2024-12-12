@@ -1,0 +1,16 @@
+﻿@model EgeApp.Frontend.Mvc.Models.Product.ProductsCategoriesViewModel
+
+@{
+    var categories = Model.CategoryList;
+    var products = Model.ProductList;
+}
+
+@await Html.PartialAsync("_CategoriesSectionPartial")
+
+@await Html.PartialAsync("_ProductSectionPartial")
+
+@await Html.PartialAsync("_DiscountSectionPartial")
+@await Html.PartialAsync("_ServicesSectionPartial")
+
+@await Html.PartialAsync("_TrendSectionPartial")
+@await Html.PartialAsync("_LocationPartial")

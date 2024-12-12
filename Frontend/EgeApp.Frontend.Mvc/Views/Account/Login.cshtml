@@ -1,0 +1,111 @@
+﻿@model EgeApp.Frontend.Mvc.Models.Identity.LoginViewModel
+
+
+<section class="login spad">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="login__form">
+                    <form method="post" asp-action="Login" asp-controller="Account">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label for="username">Kullanıcı Adı</label>
+                            <input asp-for="UserName" class="form-control" id="username" placeholder="Kullanıcı Adı"
+                                required />
+                            <span class="text-danger" asp-validation-for="UserName"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Şifre</label>
+                            <input asp-for="Password" type="password" class="form-control" id="password"
+                                placeholder="Şifre" required />
+                            <span class="text-danger" asp-validation-for="Password"></span>
+                        </div>
+                          <div class="text-right mt-3">
+                        <a href="/Account/ForgotPassword" class="text-forgot">Şifreni mi unuttun?</a>
+                    </div>
+
+                        <button type="submit" class="btn btn-danger btn-hover btn-lg mt-3">Giriş Yap</button>
+                    </form>
+
+
+                  
+
+                    <div class="d-grid gap-3 mt-4">
+                        <a href="/Account/Register" class="btn btn-secondary btn-hover btn-lg">Kayıt Ol</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+
+    .btn-danger {
+        background-color: #b40618;
+        color: white;
+        border: none;
+        padding: 15px 20px;
+   
+        font-size: 18px;
+    
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        display: block;
+
+        width: 100%;
+  
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .btn-danger:hover {
+        background-color: #9f0c1b;
+        transform: translateY(-2px);
+    }
+
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        padding: 15px 20px;
+    
+        font-size: 18px;
+
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: none;
+        display: block;
+       
+        width: 100%;
+     
+        text-align: center;
+    }
+
+    .btn-secondary:hover {
+        background-color: #343a40;
+        transform: translateY(-2px);
+    }
+
+  
+    .text-forgot {
+        color: #007bff;
+        font-weight: ;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .text-forgot:hover {
+        color: #0056b3;
+    }
+
+   
+    .d-grid {
+        display: grid;
+        gap: 10px;
+       
+    }
+
+
+    .mt-4 {
+        margin-top: 1.5rem;
+    }
+</style>

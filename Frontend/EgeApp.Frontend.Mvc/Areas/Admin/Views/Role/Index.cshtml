@@ -1,0 +1,55 @@
+﻿@model List<EgeApp.Frontend.Mvc.Data.Entities.AppRole>
+@{
+    ViewData["PageHeader"] = "";
+    ViewData["ShowButton"] = false;
+    ViewData["ButtonTitle"] = "";
+    ViewData["ButtonLink"] = "";
+}
+
+<div class="container py-5">
+    <div class="bg-white p-4 rounded shadow-sm">
+
+        <h2 class="text-center text-uppercase fw-bold mb-4" style="color: #002855;">Rol Listesi</h2>
+
+    
+        <table id="role-data-table" class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Rol Adı</th>
+                    <th>Açıklama</th>
+                    <th>ID</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in Model)
+                {
+                    <tr>
+                        <td>@role.Name</td>
+                        <td>@role.Description</td>
+                        <td><small class="text-muted">@role.Id</small></td>
+                        <td class="text-center">
+                            <a asp-area="Admin" asp-controller="Role" asp-action="Edit" asp-route-id="@role.Id"
+                                class="btn btn-sm text-white" style="background-color: #e63946;">Düzenle</a>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">Rol bulunamadı.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+  
+    <script src="~/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    @await Html.PartialAsync("_DataTablesPartial")
+}

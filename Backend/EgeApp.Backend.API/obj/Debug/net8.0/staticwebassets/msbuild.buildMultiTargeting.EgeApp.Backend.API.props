@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/EgeApp.Backend.API.props" />
+</Project>

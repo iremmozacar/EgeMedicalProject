@@ -1,0 +1,212 @@
+﻿@model EgeApp.Frontend.Mvc.Models.Identity.UserProfileViewModel
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f9fafb;
+    }
+
+    .container-fluid {
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .shadow {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .icon {
+        margin-right: 8px;
+    }
+
+    .btn-exit {
+        background-color: #124486;
+        
+        color: #ffffff;
+        border: none;
+    }
+
+    .btn-exit:hover {
+        background-color: #670606;
+  
+        color: #ffffff;
+    }
+
+    .btn-custom {
+        background-color: #124486;
+   
+        color: #ffffff;
+        border: none;
+    }
+
+    .btn-custom:hover {
+        background-color: #670606;
+      
+        color: #ffffff;
+    }
+
+    h4 {
+        color: #283593;
+   
+    }
+
+    .list-group-item {
+        color: #424242;
+
+    }
+</style>
+
+<div class="container-fluid py-5">
+   
+    <div class="d-flex justify-content-end mb-4">
+        <a href="@Url.Action("Logout", "Account")" class="btn btn-exit d-flex align-items-center">
+            <i class="bi bi-box-arrow-right icon"></i> Çıkış Yap
+        </a>
+    </div>
+
+
+    <section class="mb-5">
+        <div class="p-4 rounded shadow bg-white">
+            <h4 class="fw-bold mb-4">
+                <i class="bi bi-cart-fill icon"></i> Geçmiş Siparişler
+            </h4>
+            @if (Model.Orders != null && Model.Orders.Any())
+            {
+                <div class="accordion" id="accordionOrders">
+                    @foreach (var order in Model.Orders)
+                    {
+                        <div class="accordion-item mb-3">
+                            <h2 class="accordion-header" id="headingOrder@order.Id">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#orderCollapse@order.Id" aria-expanded="false"
+                                    aria-controls="orderCollapse@order.Id">
+                                    <i class="bi bi-receipt icon"></i> Sipariş No: @order.Id | Tarih:
+                                    @order.OrderDate.ToShortDateString() | Toplam:
+                                    @($"{order.GetTotal():C0}")
+                                </button>
+                            </h2>
+                            <div id="orderCollapse@order.Id" class="accordion-collapse collapse"
+                                aria-labelledby="headingOrder@order.Id" data-bs-parent="#accordionOrders">
+                                <div class="accordion-body">
+                                    <table class="table table-sm table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Resim</th>
+                                                <th>Ürün</th>
+                                                <th>Fiyat</th>
+                                                <th>Adet</th>
+                                                <th>Toplam</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var orderItem in order.OrderItems)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <img src="@orderItem.Product.ImageUrl" class="img-fluid rounded"
+                                                            style="width: 50px; height: 50px;" alt="@orderItem.Product.Name">
+                                                    </td>
+                                                    <td>
+                                                        <a asp-area="" asp-controller="Product" asp-action="Details"
+                                                            asp-route-id="@orderItem.Product.Id"
+                                                            class="text-decoration-none text-primary">
+                                                            @orderItem.Product.Name
+                                                        </a>
+                                                    </td>
+                                                    <td>@($"{orderItem.Price:C0}")</td>
+                                                    <td>@orderItem.Quantity</td>
+                                                    <td>@($"{orderItem.Price * orderItem.Quantity:C0}")</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle-fill icon"></i> Hiç siparişiniz bulunmamaktadır.
+                </div>
+            }
+        </div>
+    </section>
+
+  
+    <section class="mb-5">
+        <div class="p-4 rounded shadow bg-white">
+            <h4 class="fw-bold mb-4">
+                <i class="bi bi-person-fill icon"></i> Kullanıcı Bilgileri
+            </h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <strong>Ad:</strong> @Model.FirstName
+                </li>
+                <li class="list-group-item">
+                    <strong>Soyad:</strong> @Model.LastName
+                </li>
+                <li class="list-group-item">
+                    <strong>Kullanıcı Adı:</strong> @Model.UserName
+                </li>
+                <li class="list-group-item">
+                    <strong>Email:</strong> @Model.Email
+                </li>
+                <li class="list-group-item">
+                    <strong>Telefon:</strong> @Model.PhoneNumber
+                </li>
+            </ul>
+        </div>
+    </section>
+
+   
+    <section>
+        <div class="p-4 rounded shadow bg-white">
+            <h4 class="fw-bold mb-4">
+                <i class="bi bi-pencil-square icon"></i> Kullanıcı Bilgileri Güncelleme
+            </h4>
+            <form asp-area="" asp-controller="Account" asp-action="UpdateProfile" method="post">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="FirstName" class="form-label">Ad</label>
+                        <input asp-for="FirstName" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="LastName" class="form-label">Soyad</label>
+                        <input asp-for="LastName" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="UserName" class="form-label">Kullanıcı Adı</label>
+                        <input asp-for="UserName" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input asp-for="Email" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="PhoneNumber" class="form-label">Telefon Numarası</label>
+                        <input asp-for="PhoneNumber" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="CurrentPassword" class="form-label">Mevcut Şifre</label>
+                        <input asp-for="CurrentPassword" type="password" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="NewPassword" class="form-label">Yeni Şifre</label>
+                        <input asp-for="NewPassword" type="password" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="ReNewPassword" class="form-label">Yeni Şifre (Tekrar)</label>
+                        <input asp-for="ReNewPassword" type="password" class="form-control">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-custom w-100 mt-4">Kaydet</button>
+            </form>
+        </div>
+    </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>

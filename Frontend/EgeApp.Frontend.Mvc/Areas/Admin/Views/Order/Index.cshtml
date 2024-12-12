@@ -1,0 +1,118 @@
+﻿@model List<EgeApp.Frontend.Mvc.Models.Order.OrderViewModel>
+@{
+    ViewData["PageHeader"] = "";
+    ViewData["ShowButton"] = false;
+    ViewData["ButtonTitle"] = "";
+    ViewData["ButtonLink"] = "";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-9    ">
+                <h1 class="m-0">
+                    @{
+                        int? id = ViewBag.SelectedOrderState;
+                        var header = id == null ? "Siparişler"
+                        : id == 0 ? "Alınan Siparişler"
+                        : id == 1 ? "Hazırlanan Siparişler"
+                        : id == 2 ? "Gönderilen Siparişler"
+                        : "Teslim Edilen Siparişler";
+                    }
+                    @header
+                </h1>
+            </div>
+            <div class="col-sm-3 text-right">
+                <div class="form-group">
+                    <label>Sipariş Durumuna Göre Filtrele</label>
+                    <form id="form-filter" asp-area="Admin" asp-controller="Order" asp-action="Index">
+                        <select name="id" asp-items="@ViewBag.OrderStates" class="form-control custom-select"
+                            onchange="document.getElementById('form-filter').submit()">
+                        </select>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="card">
+    <div class="card-body">
+        @if (Model != null && Model.Count > 0)
+        {
+                <table id="my-data-table" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th width="70">Id</th>
+                            <th width="80">Tarih</th>
+                            <th>Üye</th>
+                            <th width="100">Durum</th>
+                            <th width="70">Tutar</th>
+                            <th width="80">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var order in Model)
+                    {
+                                <tr>
+                                    <td>@order.Id</td>
+                                    <td>@order.OrderDate</td>
+                                    <td>@order.User.FirstName @order.User.LastName</td>
+                                    <td>@order.OrderState</td>
+                                    <td>@($"{order.GetTotal():C0}")</td>
+                                    <td>
+                                        <a asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@order.Id"
+                                            class="btn btn-warning btn-sm">Detay</a>
+                                    </td>
+                                </tr>
+                    }
+
+                    </tbody>
+                </table>
+        }
+        else
+        {
+                <div class="alert alert-warning mb-0">Sipariş bulunamamıştır!</div>
+        }
+
+    </div>
+ 
+</div>
+
+@section Scripts {
+      
+        <script src="~/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="~/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="~/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <script src="~/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="~/admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+        <script src="~/admin/plugins/jszip/jszip.min.js"></script>
+        <script src="~/admin/plugins/pdfmake/pdfmake.min.js"></script>
+        <script src="~/admin/plugins/pdfmake/vfs_fonts.js"></script>
+        <script src="~/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+        <script src="~/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+        <script src="~/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    @await Html.PartialAsync("_DataTablesPartial")
+        <script>
+            const filterByOrderState(element){
+                element.
+                    }
+        </script>
+}
+
+
+@* <form asp-area="Admin" asp-controller="Order" asp-action="Index">
+<select name="id" onchange="this.parentElement.submit();console.log(this.value)">
+<option value="">Tümü</option>
+<option value="0">Sipariş Alındı</option>
+<option value="1">Hazırlanıyor</option>
+<option value="2">Gönderildi</option>
+<option value="3">Teslim Edildi</option>
+</select>
+</form> *@

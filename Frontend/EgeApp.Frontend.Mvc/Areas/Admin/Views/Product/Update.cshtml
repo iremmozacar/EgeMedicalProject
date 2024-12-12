@@ -1,0 +1,183 @@
+﻿@model EgeApp.Frontend.Mvc.Models.Product.ProductUpdateViewModel
+
+@{
+    ViewData["Title"] = "Ürün Güncelleme";
+    ViewData["PageHeader"] = "";
+}
+
+<div class="container-fluid py-5">
+    <div class="p-4 rounded shadow-sm bg-white">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-uppercase fw-bold mb-0" style="color: #002855;">Ürün Güncelleme</h2>
+            <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="btn text-white fw-bold"
+                style="background-color: #002855;">Ürün Listesi</a>
+        </div>
+
+    
+        <form asp-area="Admin" asp-controller="Product" asp-action="Update" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="ImageUrl" />
+            <input type="hidden" asp-for="Id" />
+
+            <div class="row g-4">
+          
+                <div class="col-md-8">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header text-white" style="background-color: #002855;">
+                            <h4 class="mb-0">Ürün Bilgileri</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label asp-for="Name" class="form-label text-dark">Ürün Adı</label>
+                                <input asp-for="Name" class="form-control">
+                                <span class="text-danger" asp-validation-for="Name"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Description" class="form-label text-dark">Ürün Açıklaması</label>
+                                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Price" class="form-label text-dark">Fiyat</label>
+                                    <input asp-for="Price" class="form-control">
+                                    <span class="text-danger" asp-validation-for="Price"></span>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="DiscountedPrice" class="form-label text-dark">İndirimli Fiyat</label>
+                                    <input asp-for="DiscountedPrice" class="form-control">
+                                    <span class="text-danger" asp-validation-for="DiscountedPrice"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                             
+                                <div class="col-md-4 mb-3 text-center">
+                                    <label class="form-label text-dark">Aktif</label>
+                                    <label class="switch">
+                                        <input asp-for="IsActive" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                
+                                <div class="col-md-4 mb-3 text-center">
+                                    <label class="form-label text-dark">İndirimli</label>
+                                    <label class="switch">
+                                        <input asp-for="IsDiscounted" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                               
+                                <div class="col-md-4 mb-3 text-center">
+                                    <label class="form-label text-dark">Anasayfa</label>
+                                    <label class="switch">
+                                        <input asp-for="IsHome" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header text-white" style="background-color: #820b15;">
+                            <h4 class="mb-0">Ürün Resmi</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label asp-for="Image" class="form-label text-dark">Ürün Resmi</label>
+                                <input asp-for="Image" class="form-control" type="file" id="imageUpload">
+                                <span class="text-danger" asp-validation-for="ImageUrl"></span>
+                                <div class="mt-4 text-center">
+                                    <img src="@Model.ImageUrl" id="imagePreview" class="img-thumbnail img-fluid"
+                                        style="max-height: 200px; object-fit: cover;" alt="Ürün Resmi">
+                                </div>
+                                <p class="text-muted small mt-2">JPG veya PNG formatında bir resim seçiniz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+  
+            <div class="text-end mt-4">
+                <button type="submit" class="btn text-white fw-bold" style="background-color: #8a0611;">Güncelle</button>
+                <a asp-area="Admin" asp-controller="Product" asp-action="Index"
+                    class="btn btn-outline-secondary">Vazgeç</a>
+                <a asp-area="Admin" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
+                    class="btn btn-outline-danger">Sil</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .container-fluid {
+            max-width: 95%;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #8a0611;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(14px);
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        document.getElementById('imageUpload').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            const preview = document.getElementById('imagePreview');
+            if (file) {
+                reader.onload = function (event) {
+                    preview.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}

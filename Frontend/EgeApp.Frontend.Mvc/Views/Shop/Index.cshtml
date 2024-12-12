@@ -1,0 +1,179 @@
+﻿@model List<EgeApp.Frontend.Mvc.Models.Product.ProductListViewModel>
+
+<section class="shop-spad">
+    <div class="shop-container">
+        <div class="shop-row">
+           
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var product in Model)
+                {
+                    <div class="shop-col-xl-2 shop-col-lg-3 shop-col-md-4 shop-col-sm-6 shop-mb-3">
+                        <div class="shop-product__item">
+                            <!-- Ürün Fotoğrafı -->
+                            <a href="@Url.Action("Details", "Shop", new { id = product.Id })"
+                                class="shop-product__item__pic shop-set-bg">
+                                <img src="@product.ImageUrl" alt="@product.Name" class="shop-product-image" />
+                            </a>
+                            <div class="shop-product__item__text shop-text-center">
+                                <h6>
+                                    <a href="@Url.Action("Details", "Shop", new { id = product.Id })">@product.Name</a>
+                                </h6>
+                                <!-- Fiyat Gösterimi Güncellenmiş -->
+                                <div class="shop-product__price">
+                                    @if (product.DiscountedPrice.HasValue)
+                                    {
+                                        <span>@($"{product.DiscountedPrice:#,##0.00} ₺")</span>
+                                        <del>@($"{product.Price:#,##0.00} ₺")</del>
+                                    }
+                                    else
+                                    {
+                                        @($"{product.Price:#,##0.00} ₺")
+                                    }
+                                </div>
+                                @if (product.IsFreeShipping == true)
+                                {
+                                    <span class="shop-badge shop-badge-success">Ücretsiz Kargo</span>
+                                }
+                                <form asp-controller="Shop" asp-action="AddToCart" method="post">
+                                    <input type="hidden" name="productId" value="@product.Id" />
+                                    <input type="hidden" name="quantity" value="1" />
+                                    <button type="submit" class="shop-btn shop-custom-btn shop-btn-block shop-mt-2">Sepete
+                                        Ekle</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="shop-text-center shop-w-100">Gösterilecek ürün bulunamadı.</p>
+            }
+        </div>
+    </div>
+</section>
+@section StylesSection {
+    <style>
+       
+        .shop-container {
+            max-width: 100%;
+            padding-left: 130px;
+          
+            padding-right: 10px;
+          
+            padding-top: 100px;
+            
+            padding-bottom: 100px;
+            
+        }
+
+        
+        .shop-product__item {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+            position: relative;
+            margin-bottom: 5px;
+           
+        }
+
+        .shop-product__item:hover {
+            transform: scale(1.05);
+        }
+
+      
+        .shop-product-image {
+            height: 260px;
+          
+            width: 140%;
+          
+            object-fit: contain;
+           
+            margin-bottom: 0px;
+           
+            border-radius: 8px;
+        }
+
+       
+        .shop-product__item__text h6 {
+            font-size: 14px;
+            margin-bottom: 5px;
+          
+        }
+
+        .shop-product__item__text h6 a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .shop-product__item__text h6 a:hover {
+            text-decoration: underline;
+        }
+
+        .shop-product__price {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+            
+        }
+
+      
+        .shop-custom-btn {
+            background-color: #002147;
+            color: #fff;
+            border: none;
+            padding: 7px 70px;
+            border-radius: 7px;
+            transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .shop-custom-btn:hover {
+            background-color: #003366;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+    
+        .shop-badge-success {
+            position: absolute;
+            top: 10px;
+       
+            left: 10px;
+  
+            background-color: #dfe2e7;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+      
+        .shop-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+          
+        }
+
+     
+        .shop-row .shop-col-xl-2,
+        .shop-row .shop-col-lg-3,
+        .shop-row .shop-col-md-4,
+        .shop-row .shop-col-sm-6 {
+            padding: 5px;
+           
+        }
+    </style>
+}

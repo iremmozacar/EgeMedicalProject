@@ -1,0 +1,10 @@
+﻿@model EgeApp.Frontend.Mvc.Models.Category.CategoryViewModel
+
+<h1>Kategoriyi Sil</h1>
+<p>@Model.Name adlı kategoriyi silmek istediğinizden emin misiniz?</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>

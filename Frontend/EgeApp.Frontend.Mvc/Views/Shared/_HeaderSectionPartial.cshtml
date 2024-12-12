@@ -1,0 +1,59 @@
+﻿<!-- Include Font Awesome CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-3 col-lg-2">
+             <div class="header__logo">
+    <a asp-controller="Home" asp-action="Index">
+        <img src="~/ui/img/logo2.svg" alt="Logo">
+    </a>
+</div>
+
+            </div>
+            <div class="col-xl-6 col-lg-7">
+                <nav class="header__menu">
+                    <ul>
+                        <li class="active"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                        <li><a href="/Home/Information">Hakkımızda</a></li>
+                        <li><a href="/Shop/Index">Ürünlerimiz</a></li>
+
+                        <li><a href="/Home/Contact">İletişim</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-xl-2">
+                <div class="header__right">
+                    <div class="header__icons">
+                        <!-- Hesabım -->
+                        <a asp-controller="Account" asp-action="Login" class="header-icon">
+                            <span>Hesabım</span> <i class="fa-solid fa-user"></i>
+                        </a>
+                        <!-- Arama -->
+                        <a asp-controller="Search" asp-action="Index" class="header-icon">
+                            <i class="fas fa-search"></i>
+                        </a>
+                        <!-- Sepet -->
+                        <a asp-area="" asp-controller="Cart" asp-action="Index" class="header-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                        <!-- Ürünlerimiz -->
+                        <a asp-controller="Product" asp-action="Shop" class="header-icon">
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="canvas__open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
+<!-- Header Section End -->
+
+@section StylesSection {
+
+}

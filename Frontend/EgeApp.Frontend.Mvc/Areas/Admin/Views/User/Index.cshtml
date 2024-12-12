@@ -1,0 +1,68 @@
+﻿@model List<EgeApp.Frontend.Mvc.Data.Entities.AppUser>
+@{
+    ViewData["PageHeader"] = "";
+    ViewData["ShowButton"] = true;
+    ViewData["ButtonTitle"] = "Kullanıcı Ekle";
+    ViewData["ButtonLink"] = "/admin/user/create";
+}
+
+<div class="container py-5">
+    <div class="bg-white p-4 rounded shadow-sm">
+      
+        <h2 class="text-center text-uppercase fw-bold mb-4" style="color: #002855;">Kullanıcı Listesi</h2>
+
+    
+        <table id="user-data-table" class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Üye</th>
+                    <th>Kullanıcı Adı</th>
+                    <th>E-posta</th>
+                    <th>ID</th>
+                    <th>Onaylı</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.FirstName @user.LastName</td>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td><small class="text-muted">@user.Id</small></td>
+                        <td class="text-center">
+                            <form asp-area="Admin" asp-controller="User" asp-action="ConfirmEmail" asp-route-id="@user.Id"
+                                id="form-@user.Id">
+                                <div class="form-check form-switch d-flex justify-content-center">
+                                    <input asp-for="@user.EmailConfirmed" type="checkbox" class="form-check-input"
+                                        id="confirm-email-@user.Id"
+                                        onchange="document.getElementById('form-@user.Id').submit()">
+                                </div>
+                            </form>
+                        </td>
+                        <td class="text-center">
+                            <a asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-id="@user.Id"
+                                class="btn btn-sm btn-outline-danger">Düzenle</a>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">Kullanıcı bulunamadı.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- DataTables Plugins -->
+    <script src="~/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    @await Html.PartialAsync("_DataTablesPartial")
+}

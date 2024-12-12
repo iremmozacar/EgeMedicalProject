@@ -1,0 +1,52 @@
+﻿@using EgeApp.Frontend.Mvc.Models.Other
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ege Medikal Admin</title>
+    @await Html.PartialAsync("_StylesPartial")
+    @await RenderSectionAsync("Styles", false)
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        @await Html.PartialAsync("_PreloaderPartial")
+        @await Html.PartialAsync("_NavbarPartial")
+        @await Html.PartialAsync("_MainSidebarPartial")
+
+      
+        <div class="content-wrapper">
+            @{
+                var contentDataModel = new ContentDataModel
+            {
+                PageHeader = ViewData["PageHeader"]?.ToString() ?? "Default Header", 
+                ShowButton = ViewData["ShowButton"] != null && (bool)ViewData["ShowButton"], 
+               
+            ButtonTitle = ViewData["ButtonTitle"]?.ToString() ?? "Default Button", 
+                ButtonLink = ViewData["ButtonLink"]?.ToString() ?? "#" 
+            };
+            }
+            @await Html.PartialAsync("_ContentHeaderPartial", contentDataModel)
+
+           
+            <section class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </section>
+         
+        </div>
+      
+
+
+        @await Html.PartialAsync("_FooterPartial")
+    </div>
+
+    @await Html.PartialAsync("_ScriptsPartial")
+    @await Component.InvokeAsync("Notyf")
+    @await RenderSectionAsync("Scripts", false)
+</body>
+
+</html>

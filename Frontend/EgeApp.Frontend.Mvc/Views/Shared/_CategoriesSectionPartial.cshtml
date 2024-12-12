@@ -1,0 +1,53 @@
+﻿<section class="categories">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                @if (Model?.CategoryList != null && Model.CategoryList.Count > 0)
+                {
+                        <div class="categories__item categories__large__item set-bg"
+                            data-setbg="ui/img/categories/category-1.svg">
+                            <div class="categories__text">
+                                <h1>@Model.CategoryList[0].Name</h1>
+                                <p>@Model.CategoryList[0].Description</p>
+                                <a href="#">Hemen Alışveriş Yap</a>
+                            </div>
+                        </div>
+                }
+                else
+                {
+                        <div class="alert alert-warning">
+                            Kategori bilgisi bulunamadı.
+                        </div>
+                }
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    @if (Model?.CategoryList != null && Model.CategoryList.Count > 1)
+                    {
+                        for (int i = 1; i < Math.Min(Model.CategoryList.Count, 5); i++)
+                        {
+                                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                                        <div class="categories__item set-bg"
+                                            data-setbg="@($"ui/img/categories/category-{Model.CategoryList[i].Id}.svg")">
+                                            <div class="categories__text">
+                                                <h4>@Model.CategoryList[i].Name</h4>
+                                                <p>@Model.CategoryList[i].ProductCount ürün</p>
+                                                <a href="#">Keşfet</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                        }
+                    }
+                    else
+                    {
+                            <div class="col-lg-12">
+                                <div class="alert alert-warning">
+                                    Diğer kategoriler bulunamadı.
+                                </div>
+                            </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

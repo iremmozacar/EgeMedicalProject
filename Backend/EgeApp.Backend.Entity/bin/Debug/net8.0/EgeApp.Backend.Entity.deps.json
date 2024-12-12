@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "EgeApp.Backend.Entity/1.0.0": {
+        "dependencies": {
+          "EgeApp.Backend.Shared": "1.0.0"
+        },
+        "runtime": {
+          "EgeApp.Backend.Entity.dll": {}
+        }
+      },
+      "EgeApp.Backend.Shared/1.0.0": {
+        "runtime": {
+          "EgeApp.Backend.Shared.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "EgeApp.Backend.Entity/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EgeApp.Backend.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,115 @@
+﻿@model EgeApp.Frontend.Mvc.Models.Order.OrderCreateViewModel
+
+
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Ödeme</h1>
+</div>
+
+
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <h1 class="mb-4">Fatura Bilgileri</h1>
+        <form asp-area="" asp-controller="Order" asp-action="Checkout" method="post">
+            <div class="row g-5">
+        
+                <div class="col-md-12 col-lg-6 col-xl-7">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="FirstName" class="form-label">Ad</label>
+                                <input asp-for="FirstName" class="form-control" placeholder="Adınızı giriniz">
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="LastName" class="form-label">Soyad</label>
+                                <input asp-for="LastName" class="form-control" placeholder="Soyadınızı giriniz">
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Address" class="form-label">Adres</label>
+                        <input asp-for="Address" class="form-control" placeholder="Adresinizi giriniz">
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="City" class="form-label">Şehir</label>
+                                <input asp-for="City" class="form-control" placeholder="Şehir">
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="PhoneNumber" class="form-label">Telefon</label>
+                                <input asp-for="PhoneNumber" class="form-control" placeholder="Telefon numaranız">
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Email" class="form-label">Email</label>
+                                <input asp-for="Email" class="form-control" placeholder="Email adresiniz">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              
+                <div class="col-md-12 col-lg-6 col-xl-5">
+                    <h4 class="mb-4">Sipariş Özeti</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Resim</th>
+                                    <th scope="col">Ürün</th>
+                                    <th scope="col">Fiyat</th>
+                                    <th scope="col">Adet</th>
+                                    <th scope="col">Toplam</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Cart.CartItems)
+                                {
+                                        <tr>
+                                            <td>
+                                                <img src="@item.Product.ImageUrl" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Ürün Resmi">
+                                            </td>
+                                            <td>@item.Product.Name</td>
+                                            <td>@item.Product.Price.ToString("C0")</td>
+                                            <td>@item.Quantity</td>
+                                            <td>@(item.Product.Price * item.Quantity).ToString("C0")</td>
+                                        </tr>
+                                }
+                                <tr>
+                                    <td colspan="4" class="text-end">Ara Toplam</td>
+                                    <td>@Model.Cart.GetTotalPrice().ToString("C0")</td>
+                                </tr>
+                                <tr>
+                                    @{
+                                        var shippingLimit = 20000;
+                                        var shippingPrice = Model.Cart.GetTotalPrice() > shippingLimit ? 0 : 1000;
+                                    }
+                                    <td colspan="4" class="text-end">Kargo</td>
+                                    <td>@(shippingPrice == 0 ? "Ücretsiz" : shippingPrice.ToString("C0"))</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-end fw-bold">Toplam</td>
+                                    <td class="fw-bold">@((Model.Cart.GetTotalPrice() + shippingPrice).ToString("C0"))</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary py-3">Ödemeyi Tamamla</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

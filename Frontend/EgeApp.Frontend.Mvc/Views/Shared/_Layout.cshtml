@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <title>EGE MEDİKAL</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    @await Html.PartialAsync("_StylesPartial")
+    @await RenderSectionAsync("StylesSection", false)
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <!-- Preloader -->
+        @await Html.PartialAsync("_PreloderPartial")
+
+        <!-- Search -->
+        @await Html.PartialAsync("_SearchPartial")
+
+        <!-- Offcanvas Menu -->
+        @await Html.PartialAsync("_OffCanvarsMenuBeginPartial")
+
+        <!-- Header Section -->
+        @await Html.PartialAsync("_HeaderSectionPartial")
+
+        <!-- Main Content (Sayfa içeriği buraya gelir) -->
+        <main class="content">
+            @RenderBody()
+        </main>
+
+        <!-- Footer -->
+        @await Html.PartialAsync("_FooterPartial")
+    </div>
+
+    <!-- Scripts -->
+    @await Html.PartialAsync("_ScriptsPartial")
+    @RenderSection("ScriptsSection", false)
+</body>
+
+</html>

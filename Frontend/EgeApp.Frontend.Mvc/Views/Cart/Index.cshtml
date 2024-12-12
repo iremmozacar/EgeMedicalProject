@@ -1,0 +1,200 @@
+﻿@model EgeApp.Frontend.Mvc.Models.Cart.CartViewModel
+
+<section class="shop-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shop__cart__table">
+                    @if (Model?.CartItems != null && Model.CartItems.Any())
+                    {
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ürün</th>
+                                    <th>Fiyat</th>
+                                    <th>Adet</th>
+                                    <th>Toplam</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.CartItems)
+                                {
+                                    <tr>
+                                        <td class="cart__product__item">
+                                            <img src="@item.ImageUrl ?? " ~/ui/img/default-product.jpg""
+                                                alt="Ürün Görseli">
+                                            <div class="cart__product__item__title">
+                                                <h6>@item.ProductName ?? "Ürün adı mevcut değil"</h6>
+                                            </div>
+                                        </td>
+                                        <td class="cart__price">₺ @(item.Price)</td>
+                                        <td class="cart__quantity">
+                                            <div class="pro-qty">
+                                                <input type="number" value="@item.Quantity" data-id="@item.ProductId"
+                                                    onchange="updateQuantity(this)">
+                                            </div>
+                                        </td>
+                                        <td class="cart__total">₺ @(item.Price * item.Quantity)</td>
+                                        <td class="cart__close">
+                                            <button onclick="removeItem(@item.ProductId)" class="icon_close"></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    }
+                    else
+                    {
+                        <p>Sepetiniz boş.</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="cart__btn">
+                    <a href="/">Alışverişe Devam Et</a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="cart__btn update__btn">
+                    <a href="javascript:void(0)" onclick="clearCart(@Model?.Id ?? 0)">
+                        <span class="icon_loading"></span> Sepeti Temizle
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        @if (Model?.CartItems != null && Model.CartItems.Any())
+        {
+            <div class="row">
+                <div class="col-lg-4 offset-lg-8">
+                    <div class="cart__total__procced">
+                        <h6>Sepet Toplamı</h6>
+                        <ul>
+                            <li>Ara Toplam <span>₺ @Model.CartItems.Sum(x => x.Price * x.Quantity)</span></li>
+                            <li>Genel Toplam <span>₺ @Model.CartItems.Sum(x => x.Price * x.Quantity)</span></li>
+                        </ul>
+                        <a href="#" class="primary-btn">Ödeme Yap</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<script>
+    function updateQuantity(input) {
+        const cartItemId = $(input).data('id');
+        const quantity = $(input).val();
+
+        $.post('/Cart/ChangeQuantity', { cartItemId, quantity }, function (response) {
+            location.reload();
+        });
+    }
+
+    function clearCart(cartId) {
+        $.ajax({
+            url: `/Cart/ClearCart/${cartId}`,
+            method: 'DELETE',
+            success: function () {
+                location.reload();
+            },
+            error: function (err) {
+                alert('Sepet temizlenirken bir hata oluştu: ' + err.responseText);
+            }
+        });
+    }
+
+    function removeItem(id) {
+        $.post('/Cart/RemoveItem', { id }, function () {
+            location.reload();
+        }).fail(function (err) {
+            alert('Ürün kaldırılırken bir hata oluştu: ' + err.responseText);
+        });
+    }
+</script>
+
+<style>
+
+    .cart__btn a,
+    .cart__btn.update__btn a {
+        display: inline-block;
+        padding: 15px 30px;
+        color: #000;
+        background-color: #f1f1f1;
+        border: 2px solid #ffffff;
+        transition: all 0.3s ease;
+        text-align: center;
+        text-decoration: none;
+    }
+
+ 
+    .cart__btn a:hover,
+    .cart__btn.update__btn a:hover {
+        transform: scale(1.05);
+    }
+
+
+    .primary-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        color: #fff;
+    
+        background-color: #ad1b16;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+  
+    .primary-btn:hover {
+        background-color: #c9302c;
+        color: #fff;
+     
+        transform: scale(1.05);
+    }
+
+  
+    .pro-qty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pro-qty input {
+        width: 50px;
+        text-align: center;
+        margin: 0;
+    }
+
+    .pro-qty label {
+        margin: 0;
+        font-size: 14px;
+    }
+
+ 
+    .cart__product__item img {
+        max-width: 80px;
+        margin-right: 10px;
+    }
+
+    .cart__product__item__title h6 {
+        margin: 0;
+    }
+
+    .cart__close {
+        cursor: pointer;
+        color: #d9534f;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+
+    .cart__close:hover {
+        color: #c9302c;
+    }
+</style>

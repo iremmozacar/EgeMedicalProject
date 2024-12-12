@@ -1,0 +1,84 @@
+﻿@model EgeApp.Frontend.Mvc.Models.Identity.CreateUserProfileViewModel
+@{
+    ViewData["PageHeader"] = "";
+    ViewData["ShowButton"] = false;
+    ViewData["ButtonTitle"] = "";
+    ViewData["ButtonLink"] = "";
+}
+
+<div class="container py-5">
+    <div class="p-4 rounded shadow-sm bg-white">
+        <h2 class="text-center text-uppercase fw-bold mb-4" style="color: #002855;">Kullanıcı Ekleme</h2>
+        <form asp-area="Admin" asp-controller="User" asp-action="Create" method="post">
+            <div class="row g-4">
+             
+                <div class="col-md-8">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header text-white" style="background-color: #002855;">
+                            <h4 class="mb-0">Kullanıcı Bilgileri</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label asp-for="FirstName" class="form-label text-dark">Ad</label>
+                                <input asp-for="FirstName" class="form-control">
+                                <span class="text-danger" asp-validation-for="FirstName"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="LastName" class="form-label text-dark">Soyad</label>
+                                <input asp-for="LastName" class="form-control">
+                                <span class="text-danger" asp-validation-for="LastName"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="UserName" class="form-label text-dark">Kullanıcı Adı</label>
+                                <input asp-for="UserName" class="form-control">
+                                <span class="text-danger" asp-validation-for="UserName"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Email" class="form-label text-dark">E-posta</label>
+                                <input asp-for="Email" class="form-control">
+                                <span class="text-danger" asp-validation-for="Email"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="PhoneNumber" class="form-label text-dark">Telefon Numarası</label>
+                                <input asp-for="PhoneNumber" class="form-control">
+                                <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Password" class="form-label text-dark">Şifre</label>
+                                <input asp-for="Password" type="password" class="form-control">
+                                <span class="text-danger" asp-validation-for="Password"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="RePassword" class="form-label text-dark">Şifre Tekrar</label>
+                                <input asp-for="RePassword" type="password" class="form-control">
+                                <span class="text-danger" asp-validation-for="RePassword"></span>
+                            </div>
+                            <button type="submit" class="btn w-100 text-white"
+                                style="background-color: #8a0611;">Kullanıcı Oluştur</button>
+                        </div>
+                    </div>
+                </div>
+
+           
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header text-white" style="background-color: #820b15;">
+                            <h4 class="mb-0">Roller</h4>
+                        </div>
+                        <div class="card-body">
+                            @foreach (var role in Model.Roles)
+                            {
+                                <div class="form-check mb-2">
+                                    <input @(Model.UserRoles.Any(x => x == role.Name) ? "checked" : "") type="checkbox"
+                                        class="form-check-input" name="UserRoles" value="@role.Name">
+                                    <label class="form-check-label text-dark">@role.Name</label>
+                                </div>
+                            }
+                            <span class="text-danger">@ViewBag.ErrorRoleMessage</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

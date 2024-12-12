@@ -1,0 +1,37 @@
+﻿@using EgeApp.Frontend.Mvc.Models.Product
+
+@{
+    var products = Model.ProductList;
+}
+<!-- Product Section Start -->
+<div class="container-fluid product-section py-5">
+    <div class="section-title text-center">
+        <h4>Ürünlerimize Göz Atın</h4>
+    </div>
+    <div class="product-slider">
+        @foreach (var p in products)
+        {
+            <div class="product__item">
+                <!-- Ürün Görseli -->
+                <div class="product__item__pic">
+                    <img src="@p.ImageUrl" alt="@p.Name" class="product-image" />
+                </div>
+                <!-- Ürün Bilgileri -->
+                <div class="product__item__text">
+                    <h6><a href="#">@p.Name</a></h6>
+                    <div class="product__price">@($"{p.Price:#,##0.00} ₺")</div>
+                    <form asp-area="" asp-controller="Cart" asp-action="AddToCart" method="post">
+                        <input type="hidden" name="ProductId" value="@p.Id" />
+                        <input type="hidden" name="Quantity" value="1" />
+                        <button type="submit" class="btn btn-custom btn-block mt-2">Sepete Ekle</button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+    <!-- Ürünlere Göz At Butonu -->
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Index", "Shop")" class="btn btn-explore">Ürünlere Göz At</a>
+    </div>
+</div>
+<!-- Product Section End -->
