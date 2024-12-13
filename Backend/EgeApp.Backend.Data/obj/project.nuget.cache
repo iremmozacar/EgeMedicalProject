@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bU2KI8qyDwg=",
+  "dgSpecHash": "FvRxk4anjlY=",
   "success": true,
-  "projectFilePath": "/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Data/EgeApp.Backend.Data.csproj",
+  "projectFilePath": "/Users/iremozacar/Documents/GitHub/EgeMedicalProject/Backend/EgeApp.Backend.Data/EgeApp.Backend.Data.csproj",
   "expectedPackageFiles": [
     "/Users/iremozacar/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/Users/iremozacar/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",

@@ -3298,11 +3298,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Business/EgeApp.Backend.Business.csproj",
+      "projectUniqueName": "/Users/iremozacar/Documents/GitHub/EgeMedicalProject/Backend/EgeApp.Backend.Business/EgeApp.Backend.Business.csproj",
       "projectName": "EgeApp.Backend.Business",
-      "projectPath": "/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Business/EgeApp.Backend.Business.csproj",
+      "projectPath": "/Users/iremozacar/Documents/GitHub/EgeMedicalProject/Backend/EgeApp.Backend.Business/EgeApp.Backend.Business.csproj",
       "packagesPath": "/Users/iremozacar/.nuget/packages/",
-      "outputPath": "/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Business/obj/",
+      "outputPath": "/Users/iremozacar/Documents/GitHub/EgeMedicalProject/Backend/EgeApp.Backend.Business/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/iremozacar/.nuget/NuGet/NuGet.Config"
@@ -3318,11 +3318,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Data/EgeApp.Backend.Data.csproj": {
-              "projectPath": "/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Data/EgeApp.Backend.Data.csproj"
+            "/Users/iremozacar/Documents/GitHub/EgeMedicalProject/Backend/EgeApp.Backend.Data/EgeApp.Backend.Data.csproj": {
+              "projectPath": "/Users/iremozacar/Documents/GitHub/EgeMedicalProject/Backend/EgeApp.Backend.Data/EgeApp.Backend.Data.csproj"
             },
-            "/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/EgeApp.Backend.Shared.csproj": {
-              "projectPath": "/Users/iremozacar/Documents/GitHub/EgeApp/Backend/EgeApp.Backend.Shared/EgeApp.Backend.Shared.csproj"
+            "/Users/iremozacar/Documents/GitHub/EgeMedicalProject/Backend/EgeApp.Backend.Shared/EgeApp.Backend.Shared.csproj": {
+              "projectPath": "/Users/iremozacar/Documents/GitHub/EgeMedicalProject/Backend/EgeApp.Backend.Shared/EgeApp.Backend.Shared.csproj"
             }
           }
         }

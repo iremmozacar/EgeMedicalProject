@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CSCfFDW3jtE=",
+  "dgSpecHash": "/kwC7hJdI4M=",
   "success": true,
-  "projectFilePath": "/Users/iremozacar/Documents/GitHub/EgeApp/Frontend/EgeApp.Frontend.Mvc/EgeApp.Frontend.Mvc.csproj",
+  "projectFilePath": "/Users/iremozacar/Documents/GitHub/EgeMedicalProject/Frontend/EgeApp.Frontend.Mvc/EgeApp.Frontend.Mvc.csproj",
   "expectedPackageFiles": [
     "/Users/iremozacar/.nuget/packages/aspnetcorehero.toastnotification/1.1.0/aspnetcorehero.toastnotification.1.1.0.nupkg.sha512",
     "/Users/iremozacar/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
